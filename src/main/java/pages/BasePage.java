@@ -20,7 +20,8 @@ public class BasePage {
 
     static {
         // D:\Workspace\intellij-workspace\yelpAutomate\yelpAutomate\resources
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\resources\\chromedriver_win.exe");
+        //  D:\Workspace\intellij-workspace\yelpAutomate\yelpAutomate\resources\chromedriver_win.exe
         ChromeOptions chromeOptions = new ChromeOptions();
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();

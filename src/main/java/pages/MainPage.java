@@ -23,7 +23,7 @@ public class MainPage extends BasePage{
     /**
      * Region Constructor
      */
-    public MainPage(WebDriver driver) {
+    public MainPage() {
         super(driver);
     }
 
@@ -31,12 +31,16 @@ public class MainPage extends BasePage{
      * Region Methods
      */
 
+    public void clickSearchbox (){
+        moveNClick(searchBoxInput);
+    }
+
     public void writeInSearchBox(String argText){
         write(searchBoxInput," " + argText);
     }
 
     public void clickSearchBtn (){
-        Find(buttonSearch).click();
+        moveNClick(buttonSearch);
     }
 
     /**
@@ -44,15 +48,15 @@ public class MainPage extends BasePage{
      * @param option inner text of option you'd like to click
      */
     public void clickDropdownOpt (String option){
-        Find(searchBoxDropByOption.replace("$Option",option)).click();
+        moveNClick(searchBoxDropByOption.replace("$Option",option));
     }
 
     public void setDistanceFilter(String filter){
-        Find(radioDistBtnByInnerTxt.replace("$InnerText",filter)).click();
+        moveNClick(radioDistBtnByInnerTxt.replace("$InnerText",filter));
     }
 
     public void setFeatureFilter (String filter){
-        Find(checkFeatBtnByInnerTxt.replace("$InnerText",filter)).click();
+        moveNClick(checkFeatBtnByInnerTxt.replace("$InnerText",filter));
     }
 
     public int qtyRestaurants (){
@@ -60,14 +64,13 @@ public class MainPage extends BasePage{
     }
 
     public void clickFirstSearchResult(){
-        Find(businessNameByIndex.replace("$Index","1")).click();
+        moveNClick(businessNameByIndex.replace("$Index","1"));
     }
 
     public void printNreportVals (){
         int max = qtyRestaurants()+1;
         for(int i=1;i<=max;i++){
             System.out.println(businessNameByIndex.replace("$Index",Integer.toString(i)) + " has a " + businessStarByIndex.replace("$Index",Integer.toString(i)));
-            System.out.println();
         }
     }
 
