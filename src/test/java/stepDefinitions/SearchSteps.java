@@ -1,6 +1,7 @@
 package stepDefinitions;
 
-import cucumber.api.java.en.*;
+
+import io.cucumber.java.en.*;
 import org.junit.Assert;
 import pages.BasePage;
 import pages.MainPage;
@@ -15,7 +16,7 @@ public class SearchSteps {
         BasePage.navigateTo(arg1);
     }
 
-    @Given("^selects \"([^\"]*)\" from dropdown in search box$")
+    @Given("^selects \"([^\"]*)\" from dropdown in searchbox$")
     public void selects_restaurant_from_dropdown_in_search_box(String arg1) throws Throwable {
         mainp.clickSearchbox();
         mainp.clickDropdownOpt(arg1);
@@ -30,6 +31,7 @@ public class SearchSteps {
     @Given("^filter distance by (.+) and features by (.+)$")
     public void filter_distance_by_unval_and_features_by_otro_val(String distanceVal,String featureVal) throws Throwable {
         mainp.setDistanceFilter(distanceVal);
+        Thread.sleep(100);
         mainp.setFeatureFilter(featureVal);
     }
 

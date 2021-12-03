@@ -60,6 +60,7 @@ public class BasePage {
     protected void moveNClick (String locator){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement ele = Find(locator);
+        // WebElement ele = driver.findElement(By.xpath(locator));
         js.executeScript("arguments[0].scrollIntoView();", ele);
         ele.click();
     }

@@ -10,8 +10,9 @@ public class MainPage extends BasePage{
      * Region Variables
      */
     private String searchBoxInput = "//input[@name='find_desc']";
+    private String searchBoxButton = "//span[@class='pseudo-input_text business-search-form_input-text' and contains(text(),'Find')]";
     private String searchBoxDropByOption = "//ul[@class='suggestions-list'] //span[contains (text(),'$Option')]";
-    private String buttonSearch = "//button[@id='header-search-submit']";
+    private String buttonSearch = "//button[@id='header-search-submit' or @data-testid='suggest-submit']";
     private String radioDistBtnByInnerTxt = "//span [contains ( text (), '$InnerText' )] //ancestor::div[3] //input[@type='radio']";
     private String checkFeatBtnByInnerTxt = "//span [contains ( text (), '$InnerText' )] //ancestor::div[3] //input[@type='checkbox']";
     private String businessName = "//h4 //a";
@@ -32,11 +33,11 @@ public class MainPage extends BasePage{
      */
 
     public void clickSearchbox (){
-        moveNClick(searchBoxInput);
+        moveNClick(searchBoxButton);
     }
 
     public void writeInSearchBox(String argText){
-        write(searchBoxInput," " + argText);
+        write(searchBoxInput, argText);
     }
 
     public void clickSearchBtn (){
