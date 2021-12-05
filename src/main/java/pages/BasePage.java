@@ -65,6 +65,13 @@ public class BasePage {
         ele.click();
     }
 
+    protected void jsMoveNclick (String locator){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement ele = Find(locator);
+        js.executeScript("arguments[0].scrollIntoView();", ele);
+        js.executeScript("arguments[0].click();", ele);
+    }
+
     protected void eraseNwrite (String locator, String textToWrite){
         Find(locator).clear();
         Find(locator).sendKeys(textToWrite);

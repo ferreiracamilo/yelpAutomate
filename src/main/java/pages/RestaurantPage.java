@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RestaurantPage extends BasePage{
 
     /**
@@ -34,10 +37,13 @@ public class RestaurantPage extends BasePage{
         return Find(businessAddress).getText();
     }
 
-    public void getTopThreeRevs (){
-        System.out.println( Find(reviewByIndex.replace("$Index",Integer.toString(1))).getText() );
-        System.out.println( Find(reviewByIndex.replace("$Index",Integer.toString(2))).getText() );
-        System.out.println( Find(reviewByIndex.replace("$Index",Integer.toString(3))).getText() );
+    public List<String> getTopThreeRevs (){
+        List<String> reviews = new ArrayList<String>();
+        reviews.add(Find(reviewByIndex.replace("$Index",Integer.toString(1))).getText());
+        reviews.add(Find(reviewByIndex.replace("$Index",Integer.toString(2))).getText());
+        reviews.add(Find(reviewByIndex.replace("$Index",Integer.toString(3))).getText());
+
+        return reviews;
     }
 
 }

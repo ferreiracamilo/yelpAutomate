@@ -1,8 +1,12 @@
 package pages;
 
+import io.cucumber.java.Scenario;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainPage extends BasePage{
 
@@ -13,10 +17,13 @@ public class MainPage extends BasePage{
     private String searchBoxButton = "//span[@class='pseudo-input_text business-search-form_input-text' and contains(text(),'Find')]";
     private String searchBoxDropByOption = "//ul[@class='suggestions-list'] //span[contains (text(),'$Option')]";
     private String buttonSearch = "//button[@id='header-search-submit' or @data-testid='suggest-submit']";
-    private String radioDistBtnByInnerTxt = "//span [contains ( text (), '$InnerText' )] //ancestor::div[3] //input[@type='radio']";
-    private String checkFeatBtnByInnerTxt = "//span [contains ( text (), '$InnerText' )] //ancestor::div[3] //input[@type='checkbox']";
+    private String radioDistBtnByInnerTxt = "//span [contains ( text (), '$InnerText' )] //ancestor::div[3] //input[@type='radio'] //parent::div";
+    private String checkFeatBtnByInnerTxt = "//span [contains ( text (), '$InnerText' )] //ancestor::div[3] //input[@type='checkbox'] //parent::div";
     private String businessName = "//h4 //a";
     private String businessNameByIndex = "(//h4 //a) [$Index]";
+    //private String businessNameByIndexClick = "(//h4 //a) [1] //parent::span";
+    private String businessNameByIndexClick = "(//a[contains (text(),'more') ]) [1]";
+
     private String businessStarByIndex = "(//h4 //a /ancestor::div[4] //div[contains (@class,'i-stars')] ) [$Index]";
 
     private HashMap<String, String> restaurantsInfo = new HashMap<String, String>();
@@ -57,7 +64,10 @@ public class MainPage extends BasePage{
     }
 
     public void setFeatureFilter (String filter){
-        moveNClick(checkFeatBtnByInnerTxt.replace("$InnerText",filter));
+
+
+        // moveNClick(checkFeatBtnByInnerTxt.replace("$InnerText",filter));
+        jsMoveNclick(checkFeatBtnByInnerTxt.replace("$InnerText",filter));
     }
 
     public int qtyRestaurants (){
@@ -65,14 +75,20 @@ public class MainPage extends BasePage{
     }
 
     public void clickFirstSearchResult(){
-        moveNClick(businessNameByIndex.replace("$Index","1"));
+        jsMoveNclick(businessNameByIndexClick);
     }
 
-    public void printNreportVals (){
-        int max = qtyRestaurants()+1;
+    public List<String> getBusinessesNStars (){
+        int max = qtyRestaurants();
+        List<String> businesses = new ArrayList<String>();
+
         for(int i=1;i<=max;i++){
-            System.out.println(businessNameByIndex.replace("$Index",Integer.toString(i)) + " has a " + businessStarByIndex.replace("$Index",Integer.toString(i)));
+            String businessName = Find(businessNameByIndex.replace("$Index",Integer.toString(i))).getText();
+            String businessStar = Find(businessStarByIndex.replace("$Index",Integer.toString(i))).getAttribute("aria-label");
+            businesses.add(businessName + " has a " + businessStar);
         }
+
+        return businesses;
     }
 
 }

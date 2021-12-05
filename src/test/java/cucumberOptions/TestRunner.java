@@ -11,7 +11,6 @@ import pages.BasePage;
         features = "src/test/java/features",
         glue="stepDefinitions",
         publish = true,
-        //format = {"pretty", "html:target/Destination"},
         monochrome = true,
         tags = "@do" //In order to specify which scenario to be executed meantime are tested to check out if everything is working out
 )
